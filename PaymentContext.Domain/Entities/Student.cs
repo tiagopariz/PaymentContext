@@ -1,19 +1,23 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PaymentContext.Domain.Entities
 {
     public class Student
     {
-        public ClassName(string firstName,
+        private IList<Subscription> _subscriptions;
+
+        public Student(string firstName,
                          string lastName,
                          string Document,
                          string email)
         {
             FirstName = firstName;
             LastName = lastName;
-            Document = Document;
+            Document = document;
             Email = email;
+            _subscriptions = new List<Subscription>();
         }
 
         public string FirstName { get; private set; }
@@ -21,7 +25,13 @@ namespace PaymentContext.Domain.Entities
         public string Document { get; private set; }
         public string Email { get; private set; }
         public string Address { get; private set; }
-        public List<Subscription> Subscriptions { get; private set; }
+        public IReadOnlyCollection<Subscription> Subscriptions
+        { 
+            get
+            {
+                return _subscriptions.ToArray();
+            } 
+        }
 
         public void AddSubscription(Subscription subscription)
         {
@@ -30,10 +40,9 @@ namespace PaymentContext.Domain.Entities
             // Cancela todas as outras assinaturas e coloca esta
             // como principal
             foreach (var sub in Subscriptions)
-            {
-                sub.Active = false;
-                Subscriptions.Add(sub);
-            }
+                sub.Inactivate();
+
+            _subscriptions.Add(subscription);
         }
     }
 }
