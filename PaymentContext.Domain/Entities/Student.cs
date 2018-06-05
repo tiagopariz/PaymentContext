@@ -10,7 +10,7 @@ namespace PaymentContext.Domain.Entities
 
         public Student(string firstName,
                          string lastName,
-                         string Document,
+                         string document,
                          string email)
         {
             FirstName = firstName;

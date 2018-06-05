@@ -13,12 +13,12 @@ namespace PaymentContext.Domain.Entities
                        string address,
                        string email)
         {
-            Number = Guid.NewGuit()
+            Number = Guid.NewGuid()
                          .ToString()
                          .Replace("-", "")
                          .Substring(0, 10)
                          .ToUpper();
-                         
+
             PaidDate = paidDate;
             ExpireDate = expireDate;
             Total = total;
