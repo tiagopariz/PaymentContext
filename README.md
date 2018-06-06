@@ -1,7 +1,11 @@
 # PaymentContext
 Curso Balta - Modelando Domínios Ricos - Contexto de pagamentos
 
-##Livros
+## Curso
+
+https://www.udemy.com/modelando-dominios-ricos/
+
+## Livros
 
 - Clean Code - Robert C. Martin (Uncle Bob)
 - Clean Coder - Robert C. Martin (Uncle Bob)
