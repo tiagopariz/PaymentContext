@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using PaymentContext.Shared;
 using PaymentContext.Domain.ValueObjects;
+using Flunt.Notifications;
 
 namespace PaymentContext.Domain.Entities
 {
-    public class Student
+    public class Student : Notifiable
     {
         private IList<Subscription> _subscriptions;
 
@@ -19,6 +20,7 @@ namespace PaymentContext.Domain.Entities
             Email = email;
             _subscriptions = new List<Subscription>();
 
+            AddNotifications(name, document, email);
         }
 
         public Name Name { get; private set; }
@@ -36,6 +38,8 @@ namespace PaymentContext.Domain.Entities
         public void AddSubscription(Subscription subscription)
         {
             // Se já tiver uma assinatura, cancela
+            // if (true)
+            //     throw new Exception("");
 
             // Cancela todas as outras assinaturas e coloca esta
             // como principal
