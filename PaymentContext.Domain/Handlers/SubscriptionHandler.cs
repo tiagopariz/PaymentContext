@@ -76,7 +76,8 @@ namespace PaymentContext.Domain.Handlers
                                             command.Total,
                                             command.TotalPaid,
                                             command.Payer,
-                                            command.PayerDocument,
+                                            new Document(command.PayerDocument,
+                                                         command.PayerDocumentType),
                                             address,
                                             email);
 
@@ -92,6 +93,10 @@ namespace PaymentContext.Domain.Handlers
                              student,
                              subscription,
                              payment);
+            
+            // Checar as notificações
+            if (Invalid)
+                return new CommandResult(false, "Não foi possível realizar sua assinatura");
 
             // Salvar as informações
             _repository.CreateSubscription(student);
@@ -155,7 +160,8 @@ namespace PaymentContext.Domain.Handlers
                                             command.Total,
                                             command.TotalPaid,
                                             command.Payer,
-                                            command.PayerDocument,
+                                            new Document(command.PayerDocument,
+                                                         command.PayerDocumentType),
                                             address,
                                             email);
 
@@ -171,6 +177,10 @@ namespace PaymentContext.Domain.Handlers
                              student,
                              subscription,
                              payment);
+            
+            // Checar as notificações
+            if (Invalid)
+                return new CommandResult(false, "Não foi possível realizar sua assinatura");
 
             // Salvar as informações
             _repository.CreateSubscription(student);

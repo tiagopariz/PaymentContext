@@ -25,7 +25,7 @@ namespace PaymentContext.Domain.Commands
         public decimal Total { get; set; }
         public decimal TotalPaid { get; set; }
         public string Payer { get; set; }
-        public Document PayerDocument { get; set; }
+        public string PayerDocument { get; set; }
         public EDocumentType PayerDocumentType { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
