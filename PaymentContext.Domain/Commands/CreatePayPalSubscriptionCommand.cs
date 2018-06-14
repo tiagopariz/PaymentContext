@@ -1,10 +1,13 @@
 using System;
 using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Domain.Enums;
+using PaymentContext.Shared.Commands;
+using Flunt.Notifications;
+using Flunt.Validations;
 
 namespace PaymentContext.Domain.Commands
 {
-    public class CreatePayPalSubscriptionCommand
+    public class CreatePayPalSubscriptionCommand : Notifiable, ICommand
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
