@@ -1,5 +1,5 @@
-using System;
 using PaymentContext.Domain.ValueObjects;
+using System;
 
 namespace PaymentContext.Domain.Entities
 {
@@ -16,7 +16,7 @@ namespace PaymentContext.Domain.Entities
                                  Document document,
                                  Address address,
                                  Email email)
-            : base (paidDate,
+            : base(paidDate,
                     expireDate,
                     total,
                     totalPaid,
@@ -30,8 +30,8 @@ namespace PaymentContext.Domain.Entities
             LastTransactionName = lastTransactionName;
         }
 
-        public string CardHolderName { get; private set; }
-        public string CardNumber { get; private set; }
-        public string LastTransactionName { get; private set; }
+        public string CardHolderName { get; }
+        public string CardNumber { get; }
+        public string LastTransactionName { get; }
     }
 }

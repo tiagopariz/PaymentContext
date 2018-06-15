@@ -1,7 +1,6 @@
+using Flunt.Validations;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Shared.ValueObjects;
-using Flunt.Validations;
-using Flunt.Notifications;
 
 namespace PaymentContext.Domain.ValueObjects
 {
@@ -19,18 +18,20 @@ namespace PaymentContext.Domain.ValueObjects
             );
         }
 
-        public string Number { get; private set; }
-        public EDocumentType Type { get; private set; }
+        public string Number { get; }
+        public EDocumentType Type { get; }
 
         private bool Validate()
         {
-            if (Type == EDocumentType.CNPJ && Number.Length == 14)
-                return true;
-
-            if (Type == EDocumentType.CPF && Number.Length == 11)
-                return true;
-
-            return false;
+            switch (Type)
+            {
+                case EDocumentType.Cnpj when Number.Length == 14:
+                    return true;
+                case EDocumentType.Cpf when Number.Length == 11:
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }

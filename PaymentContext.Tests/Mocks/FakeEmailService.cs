@@ -1,5 +1,4 @@
 using PaymentContext.Domain.Services;
-using PaymentContext.Domain.Entities;
 
 namespace PaymentContext.Tests.Mocks
 {
@@ -10,7 +9,6 @@ namespace PaymentContext.Tests.Mocks
                          string subject,
                          string body)
         {
-             return;           
         }
     }
 }

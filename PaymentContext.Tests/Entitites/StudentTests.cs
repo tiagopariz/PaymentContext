@@ -1,15 +1,14 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PaymentContext.Domain.Entities;
-using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Domain.Enums;
+using PaymentContext.Domain.ValueObjects;
+using System;
 
-namespace PaymentContext.Tests.Entities
+namespace PaymentContext.Tests.Entitites
 {
     [TestClass]
     public class StudentTests
     {
-        private readonly Name _name;
         private readonly Email _email;
         private readonly Document _document;
         private readonly Address _address;
@@ -18,9 +17,8 @@ namespace PaymentContext.Tests.Entities
 
         public StudentTests()
         {
-            _name = new Name("Bruce", "Wayne");
             _document = new Document("31865387185",
-                                     EDocumentType.CPF);
+                                     EDocumentType.Cpf);
             _email = new Email("batman@dc.com");
             _address = new Address("Rua 1",
                                    "1234",
@@ -29,11 +27,11 @@ namespace PaymentContext.Tests.Entities
                                    "SP",
                                    "BR",
                                    "0909099");
-            _student = new Student(_name,
+            _student = new Student(new Name("Bruce", "Wayne"),
                                    _document,
                                    _email);
             _subscription = new Subscription(null);
-            
+
         }
 
         [TestMethod]
@@ -48,7 +46,7 @@ namespace PaymentContext.Tests.Entities
                                             _document,
                                             _address,
                                             _email);
-            _subscription.AddPayment(payment);            
+            _subscription.AddPayment(payment);
             _student.AddSubscription(_subscription);
             _student.AddSubscription(_subscription);
             Assert.IsTrue(_student.Invalid);
@@ -56,7 +54,7 @@ namespace PaymentContext.Tests.Entities
 
         [TestMethod]
         public void ShouldReturnErrorWhenHadActiveSubscriptionHasNoPayment()
-        {          
+        {
             _student.AddSubscription(_subscription);
             Assert.IsTrue(_student.Invalid);
         }
@@ -73,7 +71,7 @@ namespace PaymentContext.Tests.Entities
                                             _document,
                                             _address,
                                             _email);
-            _subscription.AddPayment(payment);            
+            _subscription.AddPayment(payment);
             _student.AddSubscription(_subscription);
             Assert.IsTrue(_student.Valid);
         }

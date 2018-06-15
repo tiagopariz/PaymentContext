@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using PaymentContext.Shared;
-using PaymentContext.Domain.ValueObjects;
 using Flunt.Notifications;
 using Flunt.Validations;
+using PaymentContext.Domain.ValueObjects;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PaymentContext.Domain.Entities
 {
@@ -14,27 +12,23 @@ namespace PaymentContext.Domain.Entities
 
         public Student(Name name,
                        Document document,
-                       Email email)
+                       Email email,
+                       Address address = null)
         {
             Name = name;
             Document = document;
             Email = email;
+            Address = address;
             _subscriptions = new List<Subscription>();
 
             AddNotifications(name, document, email);
         }
 
-        public Name Name { get; private set; }
-        public Document Document { get; private set; }
-        public Email Email { get; private set; }
-        public Address Address { get; private set; }
-        public IReadOnlyCollection<Subscription> Subscriptions
-        { 
-            get
-            {
-                return _subscriptions.ToArray();
-            } 
-        }
+        public Name Name { get; }
+        public Document Document { get; }
+        public Email Email { get; }
+        public Address Address { get; }
+        public IReadOnlyCollection<Subscription> Subscriptions => _subscriptions.ToArray();
 
         public void AddSubscription(Subscription subscription)
         {
@@ -47,8 +41,8 @@ namespace PaymentContext.Domain.Entities
 
             AddNotifications(new Contract()
                 .Requires()
-                .IsFalse(hasSubscriptionActive, 
-                         "Student.Subscriptions", 
+                .IsFalse(hasSubscriptionActive,
+                         "Student.Subscriptions",
                          "Você já tem uma assinatura ativa")
                 .AreEquals(0,
                           subscription.Payments.Count,

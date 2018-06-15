@@ -1,19 +1,18 @@
-using System;
 using Flunt.Notifications;
-using Flunt.Validations;
 using PaymentContext.Domain.Commands;
-using PaymentContext.Shared.Handlers;
-using PaymentContext.Shared.Commands;
-using PaymentContext.Domain.Repositories;
-using PaymentContext.Domain.ValueObjects;
-using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.Entities;
+using PaymentContext.Domain.Enums;
+using PaymentContext.Domain.Repositories;
 using PaymentContext.Domain.Services;
+using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Shared.Commands;
+using PaymentContext.Shared.Handlers;
+using System;
 
 namespace PaymentContext.Domain.Handlers
 {
-    public class SubscriptionHandler : 
-        Notifiable, 
+    public class SubscriptionHandler :
+        Notifiable,
         IHandler<CreateBoletoSubscriptionCommand>,
         IHandler<CreatePayPalSubscriptionCommand>
     {
@@ -34,15 +33,15 @@ namespace PaymentContext.Domain.Handlers
             if (command.Invalid)
             {
                 AddNotifications(command);
-                return new CommandResult(false, 
+                return new CommandResult(false,
                                          "Não foi possível realizar sua assinatura");
             }
 
             // Verificar se o documento já está cadastrado
             if (_repository.DocumentExists(command.Document))
-                AddNotification("Document", 
+                AddNotification("Document",
                                 "Este CPF já está em uso");
-            
+
             // Verificar se e-mail já está cadastrado
             if (_repository.EmailExists(command.Document))
                 AddNotification("Email",
@@ -52,7 +51,7 @@ namespace PaymentContext.Domain.Handlers
             var name = new Name(command.FirstName,
                                 command.LastName);
             var document = new Document(command.Document,
-                                        EDocumentType.CPF);
+                                        EDocumentType.Cpf);
             var email = new Email(command.Email);
             var address = new Address(command.Street,
                                       command.Number,
@@ -93,7 +92,7 @@ namespace PaymentContext.Domain.Handlers
                              student,
                              subscription,
                              payment);
-            
+
             // Checar as notificações
             if (Invalid)
                 return new CommandResult(false, "Não foi possível realizar sua assinatura");
@@ -108,9 +107,9 @@ namespace PaymentContext.Domain.Handlers
                                "Sua assinatura foi criada");
 
             // Retornar informações
-            return new CommandResult(true, 
+            return new CommandResult(true,
                                      "Assinatura realizada com sucesso");
-        }        
+        }
 
         public ICommandResult Handle(CreatePayPalSubscriptionCommand command)
         {
@@ -119,15 +118,15 @@ namespace PaymentContext.Domain.Handlers
             if (command.Invalid)
             {
                 AddNotifications(command);
-                return new CommandResult(false, 
+                return new CommandResult(false,
                                          "Não foi possível realizar sua assinatura");
             }
 
             // Verificar se o documento já está cadastrado
             if (_repository.DocumentExists(command.Document))
-                AddNotification("Document", 
+                AddNotification("Document",
                                 "Este CPF já está em uso");
-            
+
             // Verificar se e-mail já está cadastrado
             if (_repository.EmailExists(command.Document))
                 AddNotification("Email",
@@ -137,7 +136,7 @@ namespace PaymentContext.Domain.Handlers
             var name = new Name(command.FirstName,
                                 command.LastName);
             var document = new Document(command.Document,
-                                        EDocumentType.CPF);
+                                        EDocumentType.Cpf);
             var email = new Email(command.Email);
             var address = new Address(command.Street,
                                       command.Number,
@@ -177,7 +176,7 @@ namespace PaymentContext.Domain.Handlers
                              student,
                              subscription,
                              payment);
-            
+
             // Checar as notificações
             if (Invalid)
                 return new CommandResult(false, "Não foi possível realizar sua assinatura");
@@ -192,7 +191,7 @@ namespace PaymentContext.Domain.Handlers
                                "Sua assinatura foi criada");
 
             // Retornar informações
-            return new CommandResult(true, 
+            return new CommandResult(true,
                                      "Assinatura realizada com sucesso");
         }
     }

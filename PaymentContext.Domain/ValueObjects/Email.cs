@@ -1,6 +1,5 @@
-using PaymentContext.Shared.ValueObjects;
-using Flunt.Notifications;
 using Flunt.Validations;
+using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects
 {
@@ -16,6 +15,6 @@ namespace PaymentContext.Domain.ValueObjects
             );
         }
 
-        public string Address { get; private set; }
+        public string Address { get; }
     }
 }

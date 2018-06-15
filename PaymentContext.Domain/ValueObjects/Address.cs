@@ -1,5 +1,5 @@
-using PaymentContext.Shared.ValueObjects;
 using Flunt.Validations;
+using PaymentContext.Shared.ValueObjects;
 
 namespace PaymentContext.Domain.ValueObjects
 {
@@ -27,12 +27,12 @@ namespace PaymentContext.Domain.ValueObjects
             );
         }
 
-        public string Street { get; private set; }
-        public string Number { get; private set; }
-        public string Neighborhood { get; private set; }
-        public string City { get; private set; }
-        public string State { get; private set; }
-        public string Country { get; private set; }
-        public string ZipCode { get; private set; }
+        public string Street { get; }
+        public string Number { get; }
+        public string Neighborhood { get; }
+        public string City { get; }
+        public string State { get; }
+        public string Country { get; }
+        public string ZipCode { get; }
     }
 }

@@ -1,11 +1,9 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PaymentContext.Domain.Entities;
-using PaymentContext.Domain.ValueObjects;
+using PaymentContext.Domain.Commands;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Domain.Handlers;
-using PaymentContext.Domain.Commands;
 using PaymentContext.Tests.Mocks;
+using System;
 
 namespace PaymentContext.Tests.Handlers
 {
@@ -17,7 +15,7 @@ namespace PaymentContext.Tests.Handlers
         [TestMethod]
         public void ShouldReturnErrorWhenDocumentExists()
         {
-            var handler = new SubscriptionHandler(new FakeStudentRepository(), 
+            var handler = new SubscriptionHandler(new FakeStudentRepository(),
                                                   new FakeEmailService());
             var command = new CreateBoletoSubscriptionCommand();
 
@@ -31,10 +29,10 @@ namespace PaymentContext.Tests.Handlers
             command.PaidDate = DateTime.Now;
             command.ExpireDate = DateTime.Now.AddMonths(1);
             command.Total = 60;
-            command.TotalPaid = 60   ;
+            command.TotalPaid = 60;
             command.Payer = " WAYNE CORP";
             command.PayerDocument = "12345678911";
-            command.PayerDocumentType = EDocumentType.CPF;
+            command.PayerDocumentType = EDocumentType.Cpf;
             command.Street = "Rua A";
             command.Number = "189";
             command.Neighborhood = "Hin";
@@ -45,6 +43,6 @@ namespace PaymentContext.Tests.Handlers
 
             handler.Handle(command);
             Assert.AreEqual(false, handler.Valid);
-        }        
+        }
     }
 }

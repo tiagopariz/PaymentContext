@@ -10,8 +10,7 @@ namespace PaymentContext.Tests.Commands
         [TestMethod]
         public void ShouldReturnErrorWhenNameIsInvalid()
         {
-            var command = new CreateBoletoSubscriptionCommand();
-            command.FirstName = "";
+            var command = new CreateBoletoSubscriptionCommand { FirstName = "" };
             command.Validate();
             Assert.AreEqual(false, command.Valid);
         }

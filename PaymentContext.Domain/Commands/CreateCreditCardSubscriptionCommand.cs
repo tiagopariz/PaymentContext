@@ -1,17 +1,11 @@
-using System;
-using PaymentContext.Domain.ValueObjects;
 using PaymentContext.Domain.Enums;
 using PaymentContext.Shared.Commands;
+using System;
 
 namespace PaymentContext.Domain.Commands
 {
     public class CreateCreditCardSubscriptionCommand : ICommand
     {
-        public CreateCreditCardSubscriptionCommand()
-        {
-            
-        }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Document { get; set; }
